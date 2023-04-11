@@ -57,7 +57,12 @@ public class FileManager {
 	}
 	
 	public void createReplicaFiles() {
-	 	
+
+		for(int i =0; i<numReplicas; i++){
+			String temp = filename +i;
+			replicafiles[i] = Hash.hashOf(temp);
+		}
+
 		// set a loop where size = numReplicas
 		
 		// replicate by adding the index to filename
@@ -69,7 +74,7 @@ public class FileManager {
 	
     /**
      * 
-     * @param bytesOfFile
+     *
      * @throws RemoteException 
      */
     public int distributeReplicastoPeers() throws RemoteException {
@@ -79,6 +84,8 @@ public class FileManager {
     	int index = rnd.nextInt(Util.numReplicas-1);
     	
     	int counter = 0;
+
+
 	
     	// Task1: Given a filename, make replicas and distribute them to all active peers such that: pred < replica <= peer
     	
@@ -238,7 +245,7 @@ public class FileManager {
 		return sizeOfByte;
 	}
 	/**
-	 * @param size the size to set
+
 	 */
 	public void setSizeOfByte(String sizeOfByte) {
 		this.sizeOfByte = sizeOfByte;
